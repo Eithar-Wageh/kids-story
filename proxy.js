@@ -1,24 +1,19 @@
-import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server'
+// middleware.ts
+import { clerkMiddleware } from "@clerk/nextjs/server";
 
-const isPublicRoute = createRouteMatcher([
-  '/sign-in(.*)',
-  '/sign-up(.*)',
-  '/'
-
-  
-])
-
-export default clerkMiddleware(async (auth, req) => {
-  if (!isPublicRoute(req)) {
-    await auth.protect()
-  }
-})
+export default clerkMiddleware({
+  publicRoutes: [
+    "/",                     // الصفحة الرئيسية مفتوحة للكل
+    "/sign-in(.*)",
+    "/sign-up(.*)",
+    "/api(.*)"               // لو عندك أي API routes عامة
+  ]
+});
 
 export const config = {
   matcher: [
-    // Skip Next.js internals and all static files, unless found in search params
-    '/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',
-    // Always run for API routes
-    '/(api|trpc)(.*)',
+    "/((?!_next/static|_next/image|favicon.ico|.*\\..*).*)", // كل الصفحات عادي
+    "/", 
+    "/(api|trpc)(.*)"
   ],
-}
+};
