@@ -134,7 +134,7 @@ You may also like these story ideas
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
 
         {suggestions.map((item,index)=>(
-<div key={item.id || index} className="border rounded-lg bg-purple-50 shadow flex flex-col">
+<div key={item.id ?? item.title ?? index} className="border rounded-lg bg-purple-50 shadow flex flex-col">
     {item.imageURL && (
                      <div className=" rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
                       <img
