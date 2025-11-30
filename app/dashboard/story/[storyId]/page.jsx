@@ -151,7 +151,7 @@ useEffect(()=>{
               <strong className="text-lg text-[#a4597f] block mb-2">
                 {item.title}
               </strong>
-              <p className="text-gray-700 text-sm line-clamp-3">
+              <p className="text-gray-700 text-sm ">
                 {item.description}
               </p>
             </div>
