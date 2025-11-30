@@ -118,63 +118,49 @@ useEffect(()=>{
         </div>
       </div>
 
+<div className="max-w-5xl mx-auto mt-12 px-6 mb-20">
+  <div className="bg-white rounded-lg shadow-lg p-8">
+    <h2 className="text-2xl font-semibold mb-8 text-[#c9749d] text-center">
+      You may also like these story ideas
+    </h2>
 
-<div className="max-w-5xl mx-auto mt-12 px-6">
-
-    <div className="bg-white rounded-lg shadow-lg p-6">
-<h2 className="text-2xl font-semibold mb-6 text-[#c9749d] text-center">
-You may also like these story ideas
-</h2>
-
-{suggestLoading?(
-    <div className="flex justify-center py-6">
-        <Loader2 className="animate-spin h-6 w-6 text-[#c9749d]" />
-    </div>
-):(
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-
-       {suggestLoading ? (
-  <div className="flex justify-center py-6">
-    <Loader2 className="animate-spin h-6 w-6 text-[#c9749d]" />
-  </div>
-) : (
-  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-    {suggestions.map((item, index) => (
-      <div
-        key={item.id ?? item.title ?? index}
-        className="border rounded-lg bg-purple-50 shadow flex flex-col"
-      >
-        {item.imageURL && (
-          <div className="rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
-            <img
-              src={item.imageURL}
-              alt={item.title}
-              className="w-full h-48 object-cover"
-              onError={(e) => {
-                e.target.style.display = "none";
-              }}
-            />
-          </div>
-        )}
-        <strong className="text-lg text-[#a4597f] mb-2 p-4">
-          {item?.title}
-        </strong>
-        <p className="text-gray-700 flex-1 px-4 pb-4">
-          {item?.description}
-        </p>
+    {suggestLoading ? (
+      <div className="flex justify-center py-8">
+        <Loader2 className="animate-spin h-8 w-8 text-[#c9749d]" />
       </div>
-    ))}
+    ) : suggestions.length > 0 ? (
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        {suggestions.map((item) => (
+          <div
+            key={item.id ?? item.title ?? Math.random()}
+            className="border rounded-lg bg-purple-50 shadow hover:shadow-lg transition-all duration-300 flex flex-col overflow-hidden"
+          >
+            {item.imageURL && (
+              <div className="h-48">
+                <img
+                  src={item.imageURL}
+                  alt={item.title}
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    e.target.style.display = "none";
+                  }}
+                />
+              </div>
+            )}
+            <div className="p-4 flex-1">
+              <strong className="text-lg text-[#a4597f] block mb-2">
+                {item.title}
+              </strong>
+              <p className="text-gray-700 text-sm line-clamp-3">
+                {item.description}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+    ) : null}
   </div>
-)}
-    </div>
-)
-
-
-
-}
-    </div>
 </div>
-
     </>
   );
 }
