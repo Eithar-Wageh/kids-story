@@ -64,7 +64,7 @@ router.push("/dashboard/my-stories")
       <div className="mb-6">
         <h2 className="text-xl font-semibold mb-4">1. Story Type</h2>
         <div className="grid md:grid-cols-3 gap-4">
-          {storyTypes.map((type, index) => (
+          {storyTypes.map((type) => (
             <div onClick={()=>setSelectedType(type.title)} className="p-4 rounded flex cursor-pointer flex-col items-center" key={type.title}>
               <img
                 src={type?.image}
