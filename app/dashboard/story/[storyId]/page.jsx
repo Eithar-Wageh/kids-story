@@ -133,25 +133,39 @@ You may also like these story ideas
 ):(
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
 
-        {suggestions.map((item,index)=>(
-<div key={item.id ?? item.title ?? index} className="border rounded-lg bg-purple-50 shadow flex flex-col">
-    {item.imageURL && (
-                     <div className=" rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
-                      <img
-                        src={item.imageURL}
-                        alt={item.title}
-                        className="w-full h-48 object-cover"
-                        onError={(e) => {
-                          e.target.style.display = "none";
-                        }}
-                      />
-                    </div>
-                  )}
-<strong className="text-lg text-[#a4597f] mb-2">{item?.title}</strong>
-<p className="text-gray-700 flex-1">{item?.description}</p>
-
-</div>
-        ))}
+       {suggestLoading ? (
+  <div className="flex justify-center py-6">
+    <Loader2 className="animate-spin h-6 w-6 text-[#c9749d]" />
+  </div>
+) : (
+  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+    {suggestions.map((item, index) => (
+      <div
+        key={item.id ?? item.title ?? index}
+        className="border rounded-lg bg-purple-50 shadow flex flex-col"
+      >
+        {item.imageURL && (
+          <div className="rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+            <img
+              src={item.imageURL}
+              alt={item.title}
+              className="w-full h-48 object-cover"
+              onError={(e) => {
+                e.target.style.display = "none";
+              }}
+            />
+          </div>
+        )}
+        <strong className="text-lg text-[#a4597f] mb-2 p-4">
+          {item?.title}
+        </strong>
+        <p className="text-gray-700 flex-1 px-4 pb-4">
+          {item?.description}
+        </p>
+      </div>
+    ))}
+  </div>
+)}
     </div>
 )
 
